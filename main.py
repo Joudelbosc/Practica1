@@ -46,4 +46,5 @@ del df_futures['date']
 locale.setlocale(locale.LC_ALL, 'es_ES.utf8')
 df_futures.index = pd.to_datetime(df_futures.index, format="%d-%b-%Y")
 
+
 print(df_futures)
