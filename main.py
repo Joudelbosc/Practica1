@@ -27,7 +27,8 @@ for row in soup.findAll('table')[0].tbody.findAll('tr'):
     row = str(row)
     # Aquesta línia no fa res --- rows.append(row)
     m = re.search('(<td class="Destacado text-left">Día (.+?)</td>)', row)
-    # print("ROWWW:   " + row[int(len(row)/2):])
+    print("ROWWW:   " + row[int(len(row)/2):])
+
     if m:
         day = re.search('((.+?)-)', m.group(2))
         month = re.search('(-(.+?)-)', m.group(2))
@@ -54,7 +55,6 @@ d = {'Dia': date, 'Base': value1, 'Pic': value2}
 df_futures = pd.DataFrame(data=d)
 
 # PER QUÈ ESTÀ REPETIT DUES VEGADES LA SEGÜENT LÍNIA?
-df_futures.index = df_futures['Dia']
 df_futures.index = df_futures['Dia']
 del df_futures['Dia']
 
