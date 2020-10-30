@@ -29,20 +29,23 @@ desplegable.find_element_by_class_name("btn").click()
 
 time.sleep(2)
 
-
-try:
+# No se si fa res.
+"""try:
     main = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CLASS_NAME, "main"))
     )
 
-    articles = main.find_elements_by_tag_name("article")
 except:
     driver.quit()
+"""
 
-
+driver.find_element_by_class_name("media-heading").click()
 
 time.sleep(5)
 
+for table in driver.find_elements_by_class_name("Precios"):
+    data = [item.text for item in table.find_elements_by_class_name("Destacado text-left")]
+    print(data)
 
 driver.quit()
 
