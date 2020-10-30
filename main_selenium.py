@@ -18,13 +18,6 @@ time.sleep(2)
 
 driver.find_element_by_class_name("btn-desplegable").click()
 
-"""start_date = driver.find_element_by_name("ctl00$ctl00$Contenido$Contenido$Desde$Desde_Fecha")
-start_date.clear() # clear any value that was in the field before (if you don't clear, will append the new string sent.)
-start_date.send_keys("08/17/2018")"""
-#search = driver.find_elements_by_name("ctl00$ctl00$Contenido$Contenido$Desde$Desde_Fecha")
-#print(search)
-#search.send("30/09/2020")
-#search.send_keys(Keys.RETURN)
 
 desplegable = driver.find_element_by_id("despleg-menu")
 
