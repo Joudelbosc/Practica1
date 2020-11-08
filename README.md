@@ -24,9 +24,9 @@ Enllaç a zenodo de les dades:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4263314.svg)](https://doi.org/10.5281/zenodo.4263314)
 
-Arxus:
+Descripció dels fitxers:
 ```
-main_selenium.py és el fitxer que té el codi python per executar les dades.
+main_selenium.py és el fitxer amb el codi python que és necessari executar per a obtenir les dades.
 
 El fitxer .pdf té les respostes de les preguntes de la pràctica.
 
