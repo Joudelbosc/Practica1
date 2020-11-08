@@ -1,4 +1,4 @@
-# Practica 1: Web scrapper https://www.meff.es/esp/Derivados-Commodities/Precios-Cierre.
+# Practica 1: Web scrapper https://www.meff.es
 
 ## Català
 
@@ -7,7 +7,7 @@ Extreu els preus de tancament "Base" i "Punta" de cada dia i els guarda en un .c
 La primera columna és un "datetime" que indica la data de cada registre en les files.
 Aquesta primera columna actua d'índex.
 
-Web: https://www.meff.es/esp/
+URL de les dades: https://www.meff.es/esp/Derivados-Commodities/Precios-Cierre.
 
 El script s'executa:
 ``` Python
@@ -23,3 +23,12 @@ Víctor Iruela Garrido
 Enllaç a zenodo de les dades:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4263314.svg)](https://doi.org/10.5281/zenodo.4263314)
+
+Arxus:
+```
+main_selenium.py és el fitxer que té el codi python per executar les dades.
+
+El fitxer .pdf té les respostes de les preguntes de la pràctica.
+
+El fitxer .png es un exemple de la representació gràfica de les dades.
+```
