@@ -7,9 +7,11 @@ import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
 
+# Emmagatzemem la data actual i posem l'idioma en castellà, ja que les dates que haurem de parcejar estaran en castellà:
 dt = datetime.now()
 locale.setlocale(locale.LC_ALL, 'es_ES.utf8')
 
+# Utilitzem Selenium per a anar a trobar les dades:
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get("https://www.meff.es/esp/")
 time.sleep(3)
@@ -31,6 +33,8 @@ table_driver = driver.find_element_by_id("Contenido_Contenido_tblDatos")
 table_str = table_driver.get_attribute('innerHTML')
 driver.quit()
 
+# Una vegada que hem trobat les dades i les hem assignat a una variable en format d'string, la parcejem per a separar
+# i organitzar les dades en un DataFrame, que guardarem posteriorment:
 regex = '<td.+'
 table_rows_list = re.findall(regex, table_str)
 
@@ -47,7 +51,13 @@ for row in table_rows_list:
         day = re.search('((.+?)-)', m.group(2))
         month = re.search('(-(.+?)-)', m.group(2))
         year = re.search('(\w{3}-(.+?)$)', m.group(2))
-        date.append(datetime.strptime(day.group(2) + "-" + month.group(2) + ".-" + year.group(2), '%d-%b-%Y'))
+
+        # El parceig de la data el posem amb un try, ja que canvia si l'executem a Linux o Windows:
+        try:
+            date.append(datetime.strptime(day.group(2) + "-" + month.group(2) + ".-" + year.group(2), '%d-%b-%Y'))
+        except ValueError:
+            date.append(datetime.strptime(day.group(2) + "-" + month.group(2) + "-" + year.group(2), '%d-%b-%Y'))
+
         v1 = re.search('(<td class="Sep">&nbsp;</td><td>(.+?)</td><td class=)', row).group(2).replace(',', '.')
         v2 = re.search('(<td class="Sep">&nbsp;</td><td>(.+?)</td><td class=)', row[int(len(row) / 2):]).group(2) \
             .replace(',', '.')
@@ -59,8 +69,8 @@ for row in table_rows_list:
             value2.append(float(v2))
         except ValueError:
             value2.append(None)
-    # Si sempre comença amb els dies i posa els resums al final, podem fer un break i així no acaba de fer tot el bucle,
-    # quan ja no quedin dies per parsejar. Si no sempre fos així, podríem filtrar al principi només les rows que
+    # Com que sempre comença amb els dies i posa els resums al final, podem fer un break i així no acaba de fer tot el
+    # bucle, quan ja no quedin dies per parcejar. Si no sempre fos així, podríem filtrar al principi només les rows que
     # contenen dies (files que comencen amb la paraula 'Día'):
     else:
         break
@@ -68,12 +78,15 @@ for row in table_rows_list:
 d = {'Dia': date, 'Preu Base (€)': value1, 'Preu Pic (€)': value2}
 df_futures = pd.DataFrame(data=d)
 
-# PER QUÈ ESTÀ REPETIT DUES VEGADES LA SEGÜENT LÍNIA? --> Mirar i treure si no fa res!!!!!!!!!!!!!
+# Posem la variable 'Dia' com a index i esborrem la columna antiga:
 df_futures.index = df_futures['Dia']
 del df_futures['Dia']
 
+# Guardem les dades en un CSV, amb el títol començant pel període dels futurs que recullen les dades:
 df_futures.to_csv('./{}_{}_dfFutures.csv'.format(str(df_futures.index[1].date()), str(df_futures.index[-1].date())))
 
+# Guardem i mostrem per pantalla el contingut del dataset resumit en un gràfic dels preus base i pic dels futurs, en
+# funció del dia (imatge adjunta al punt 5 del PDF):
 df_futures.plot()
 plt.xlabel('Data')
 plt.ylabel('Precios de cierre (€)')

@@ -1,29 +1,25 @@
-# Practica 1: Web scrapper.
+# Practica 1: Web scrapper https://www.meff.es/esp/Derivados-Commodities/Precios-Cierre.
 
-Foobar is a Python library for dealing with word pluralization.
+## Català
 
-## Installation
+Aquest programa implementa un web scrapper utilitzant la llibreria Selenium de Python.
+Extreu els preus de tancament "Base" i "Punta" de cada dia i els guarda en un .csv
+La primera columna és un "datetime" que indica la data de cada registre en les files.
+Aquesta primera columna actua d'índex.
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Web: https://www.meff.es/esp/
 
-```bash
-pip install foobar
+El script s'executa:
+``` Python
+ python main_selenium.py
 ```
 
-## Usage
-
-```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+Els integrants de l'equip que ha fet la pràctica son:
+```
+Joel Rosell Mirmi
+Víctor Iruela Garrido
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Enllaç a zenodo de les dades:
 
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4263314.svg)](https://doi.org/10.5281/zenodo.4263314)
